@@ -1,0 +1,6 @@
+docker build facialRecognition -t fr:latest
+
+
+docker run -it -v /c/Users/$YOURHOMEDIRECTORY$/facialRecognition:/medium-facenet-tutorial fr bin/bash
+
+#assuming you have enough space on C:
