@@ -2,4 +2,6 @@
 
 Photo Credit LFW dataset
 
-Program Credit Cole Murray
+Docker Program Credit Cole Murray
+
+Main Authors Pascal Reich, John Collins, and Tim Nemchuck
