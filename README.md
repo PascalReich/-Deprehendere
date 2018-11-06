@@ -1,6 +1,6 @@
 # -Deprehendere
 
-Photo Credit LFW dataset
+Photo Credits LFW, MUCT, and GT dataset
 
 Docker Program Credit Cole Murray
 
