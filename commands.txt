@@ -1,6 +1,8 @@
+RUN IN DOCKER QUICKSTART TERMINAL BECAUSE OF UNIX
+
 docker build facialRecognition -t fr:latest
 
 
-docker run -it -v /c/Users/$YOURHOMEDIRECTORY$/facialRecognition:/medium-facenet-tutorial fr bin/bash
-
-#assuming you have enough space on C:
+docker run -v $PWD:/medium-facenet-tutorial -e PYTHONPATH=$PYTHONPATH:/medium-facenet-tutorial -it fr python3 /medium
+-facenet-tutorial/medium_facenet_tutorial/preprocess.py --input-dir /medium-facenet-tutorial/lfw --output-dir /medium-f
+acenet-tutorial/output/intermediate --crop-dim 180
