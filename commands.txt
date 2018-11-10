@@ -2,7 +2,35 @@ RUN IN DOCKER QUICKSTART TERMINAL BECAUSE OF UNIX
 
 docker build facialRecognition -t fr:latest
 
+docker build -f $PWD -t fr:latest
 
-docker run -v $PWD:/medium-facenet-tutorial -e PYTHONPATH=$PYTHONPATH:/medium-facenet-tutorial -it fr python3 /medium
--facenet-tutorial/medium_facenet_tutorial/preprocess.py --input-dir /medium-facenet-tutorial/lfw --output-dir /medium-f
-acenet-tutorial/output/intermediate --crop-dim 180
+DLIB
+
+
+docker run -v $PWD:/medium-facenet-tutorial -e PYTHONPATH=$PYTHONPATH:/medium-facenet-tutorial -it fr python3 /medium-facenet-tutorial/medium_facenet_tutorial/preprocess.py --input-dir /medium-facenet-tutorial/lfw --output-dir /medium-facenet-tutorial/output/intermediate --crop-dim 180
+
+docker run -v $PWD:/src -e PYTHONPATH=$PYTHONPATH:/src -it fr python3 /src/code/preprocess.py --input-dir /src/lfw --output-dir /src/output/intermediate --crop-dim 180
+
+
+substitute lfw for db dir
+
+MODEL
+
+docker run -v $PWD:/medium-facenet-tutorial -e PYTHONPATH=$PYTHONPATH:/medium-facenet-tutorial -it fr python3 /medium-facenet-tutorial/medium_facenet_tutorial/download_and_extract_model.py --model-dir /medium-facenet-tutorial/etc
+
+docker run -v $PWD:/src -e PYTHONPATH=$PYTHONPATH:/src -it fr python3 /src/code/download_and_extract_model.py --model-dir /src/etc
+
+
+TRAIN
+
+docker run -v $PWD:/medium-facenet-tutorial -e PYTHONPATH=$PYTHONPATH:/medium-facenet-tutorial -it fr python3 /medium-facenet-tutorial/medium_facenet_tutorial/train_classifier.py --input-dir /medium-facenet-tutorial/output/intermediate --model-path /medium-facenet-tutorial/etc/20170511-185253/20170511-185253.pb --classifier-path /medium-facenet-tutorial/output/classifier.pkl --num-threads 16 --num-epochs 25 --min-num-images-per-class 10 --is-train
+
+docker run -v $PWD:/src -e PYTHONPATH=$PYTHONPATH:/src -it fr python3 src/code/train_classifier.py --input-dir /src/output/intermediate --model-path /src/etc/20170511-185253/20170511-185253.pb --classifier-path /src/output/classifier.pkl --num-threads 16 --num-epochs 25 --min-num-images-per-class 10 --is-train
+
+
+DETECT
+
+docker run -v $PWD:/medium-facenet-tutorial -e PYTHONPATH=$PYTHONPATH:/medium-facenet-tutorial -it fr python3 /medium-facenet-tutorial/medium_facenet_tutorial/train_classifier.py --input-dir /medium-facenet-tutorial/output/intermediate --model-path /medium-facenet-tutorial/etc/20170511-185253/20170511-185253.pb --classifier-path /medium-facenet-tutorial/output/classifier.pkl --num-threads 16 --num-epochs 5 --min-num-images-per-class 10
+
+
+docker run -v $PWD:/src -e PYTHONPATH=$PYTHONPATH:/src -it fr python3 /src/code/train_classifier.py --input-dir /src/output/intermediate --model-path /src/etc/20170511-185253/20170511-185253.pb --classifier-path /src/output/classifier.pkl --num-threads 16 --num-epochs 5 --min-num-images-per-class 10
