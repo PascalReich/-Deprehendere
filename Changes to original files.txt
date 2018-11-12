@@ -1,3 +1,0 @@
-align_dlib.py
-
-	Ln 160, "scale", set to 0.75 instead of 1, decreasing gives larger margin of output face
