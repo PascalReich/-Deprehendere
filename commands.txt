@@ -4,6 +4,12 @@ docker build facialRecognition -t fr:latest
 
 docker build -f $PWD -t fr:latest
 
+LFW download
+
+curl -O http://vis-www.cs.umass.edu/lfw/lfw.tgz
+
+tar -xzvf lfw.tgz
+
 DLIB
 
 
