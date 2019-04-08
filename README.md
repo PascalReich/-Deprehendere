@@ -1,10 +1,5 @@
-# -Deprehendere
+# DPHDR-Website
 
-Photo Credits LFW, MUCT, and GT dataset
+This is a separate repo just for website so its a little cleaner
 
-Docker Program Credit Cole Murray
-
-Main Authors Pascal Reich, John Collins
-
-Helpers: Tom Murphy, Timothy Nemchuck
-
+# TIM GET WORKING

@@ -7,3 +7,5 @@ scipy==0.19.1
 numpy==1.13.1
 
 requests==2.18.3
+
+matplotlib
