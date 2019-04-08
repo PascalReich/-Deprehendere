@@ -11,7 +11,7 @@ from sklearn.svm import SVC
 from tensorflow.python.platform import gfile
 
 from lfw_input import filter_dataset, split_dataset, get_dataset
-from medium_facenet_tutorial import lfw_input
+import lfw_input
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,7 @@ def main(input_directory, model_path, classifier_output_path, batch_size, num_th
         train_set, test_set = _get_test_and_train_set(input_directory, min_num_images_per_label=min_images_per_labels,
                                                       split_ratio=split_ratio)
         if is_train:
-            images, labels, class_names = _load_images_and_labels(train_set, image_size=160, batch_size=batch_size,
+            images, labels, class_names, image_paths = _load_images_and_labels(train_set, image_size=160, batch_size=batch_size,
                                                                   num_threads=num_threads, num_epochs=num_epochs,
                                                                   random_flip=True, random_brightness=True,
                                                                   random_contrast=True)

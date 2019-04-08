@@ -125,7 +125,8 @@ def split_dataset(dataset, split_ratio=0.8):
             continue  # Not enough images for test set. Skip class...
         train_set.append(ImageClass(cls.name, paths[0:split]))
         test_set.append(ImageClass(cls.name, paths[split:-1]))
-        logger.info(paths[split:-1])
+        logger.info('train set:'+str(len(train_set)))
+        logger.info('test set:'+str(len(test_set)))
         
     return train_set, test_set
 
