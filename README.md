@@ -1,5 +1,3 @@
-# DPHDR-Website
+# -Deprehendere
 
-This is a separate repo just for website so its a little cleaner
-
-# TIM GET WORKING
+This is the branch for the code used for the 2019 i2 showcase demo
