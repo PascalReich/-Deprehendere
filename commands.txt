@@ -45,3 +45,8 @@ SE
 
 docker run -v $PWD:/src -e PYTHONPATH=$PYTHONPATH:/src -it fr python3 /src/SE_code/main.py --input-dir /src/receiver --id-classifier-path /src/output/50-id-classifier.pkl --gender-classifier-path /src/output/25-gender-classifier.pkl --age-classifier-path /src/output/5-age-classifier.pkl
 
+
+again
+
+docker run -v $PWD:/src -e PYTHONPATH=$PYTHONPATH:/src -it fr python3 /src/main.py
+
