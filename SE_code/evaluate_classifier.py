@@ -18,8 +18,8 @@ import tensorflow as tf
 from sklearn.svm import SVC
 from tensorflow.python.platform import gfile
 
-from lfw_input import filter_dataset, split_dataset, get_dataset
-from code import lfw_input
+from SE_code.lfw_input import filter_dataset, split_dataset, get_dataset
+from SE_code import lfw_input
 import json
 
 logger = logging.getLogger(__name__)

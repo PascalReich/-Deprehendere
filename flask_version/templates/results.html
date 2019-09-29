@@ -29,18 +29,34 @@
 <body>
 
 <div id="resultspage">
+    <img src="{{labels.image_path}}">
     <table>
         <tr>
-            <th>gender</th>
-            <th>probability</th>
-            <th>image</th>
+            <th>idk</th>
+            <th>result</th>
+            <th>case</th>
+            <th>confidence</th>
         </tr>
         <tr>
-            <td>male</td>
-            <td>62%</td>
-            <td>image</td>
+            <td>ID</td>
+            <td>{{labels.ID}}</td>
+            <td>{{labels.ID_case}}</td>
+            <td>{{labels.ID_prob}}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>{{labels.GEN}}</td>
+            <td>{{labels.GEN_case}}</td>
+            <td>{{labels.GEN_prob}}</td>
+        </tr>
+        <tr>
+            <td>Age</td>
+            <td>{{labels.AGE}}</td>
+            <td>{{labels.AGE_case}}</td>
+            <td>{{labels.AGE_prob}}</td>
         </tr>
     </table>
+    <p>That took {{time}} seconds!! 
 </div>
 </body>
 </html>

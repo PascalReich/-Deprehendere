@@ -381,6 +381,7 @@
             <p id="message"></p>
             <div id="result" style="display: none">
                 <h2 style="text-align: center;">Your Results</h2>
+                <div id="results"></div>
                 <img id="loading" src="static/loading.gif"/>
             </div>
         </div>
@@ -482,6 +483,7 @@
     }
 
     $('#submit').on('click', function () {
+        $('#result').show()
         var file_data = $('#file').prop('files')[0];
         var form_data = new FormData();
         form_data.append('file', file_data);
@@ -494,11 +496,11 @@
             data: form_data,
             type: 'post',
             success: function (response) {
-                $('#result').html(response); // display success response from the server
-                $('#result').show()
+                $('#loading').hide()
+                $('#results').html(response); // display success response from the server
             },
             error: function (response) {
-                $('#result').html(response); // display error response from the server
+                $('#results').html(response); // display error response from the server
             }
         });
     });

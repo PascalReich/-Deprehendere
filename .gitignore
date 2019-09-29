@@ -4,3 +4,9 @@
 *.iml
 *.h
 *.pyc
+flask_version/.DS_Store
+etc/.DS_Store
+flask_version/SE_code/.DS_Store
+flask_version/static/.DS_Store
+flask_version/uploads/.DS_Store
+SE_code/.DS_Store
