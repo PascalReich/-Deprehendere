@@ -383,14 +383,14 @@ def _evaluate_classifier(emb_array, classifier_filename, images, paths):
             "#": z[0],
             "image_path": z[1],
             "ID": z[2],
-            "ID-prob": z[3],
-            "ID-case": decide_case(z[3]),
+            "ID_prob": z[3],
+            "ID_case": decide_case(z[3]),
             "GEN": z[4],
-            "GEN-prob": z[5],
-            "GEN-case": decide_case(z[5]),
+            "GEN_prob": z[5],
+            "GEN_case": decide_case(z[5]),
             "AGE": z[6],
-            "AGE-prob": z[7],
-            "AGE-case": decide_case_age(z[7])
+            "AGE_prob": z[7],
+            "AGE_case": decide_case_age(z[7])
         }
         results_dict_array.append(results_dict)
     # print(len(results), len(results_dict_array))
