@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,9 +15,9 @@
     <title>Deprehendere</title>
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600" rel="stylesheet">
     <link rel="shortcut icon" href="favicon.ico" type="favicon.ico">
-    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="css/demo.css" />
-    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/demo.css"/>
+    <link rel="stylesheet" type="text/css" href="static/css/component.css"/>
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -196,7 +195,7 @@
             width: 200px;
             margin: auto auto 50px;
             border-radius: 50%;
-            background-image: url("happyPerson.png");
+            background-image: url("static/happyPerson.png");
             background-size: 210px;
             background-position-x: 5px;
             border: 1px solid
@@ -274,8 +273,8 @@
             display: inline-block;
             margin: 15px;
             background-color: #fcfcfc;
-            width: 50%;      
-            text-align:left;      
+            width: 50%;
+            text-align: left;
         }
 
         .bio-content {
@@ -295,17 +294,17 @@
         }
 
         #JP-img {
-            background-image: url("JP.png");
+            background-image: url("static/JP.png");
             background-size: 100px;
         }
 
         #tim-img {
-            background-image: url("Tim.jpg");
+            background-image: url("static/Tim.jpg");
             background-size: 100px;
         }
 
         #pascal-img {
-            background-image: url("Pascal.png");
+            background-image: url("static/Pascal.png");
             background-size: 100px;
         }
 
@@ -318,6 +317,7 @@
             -moz-text-align-last: center;
             text-align-last: center;
         }
+
         #result {
             margin: 0 auto;
             margin-top: 150px;
@@ -330,7 +330,7 @@
             margin-right: 50px;
         }
 
-        table, tr, td { 
+        table, tr, td {
             border: 1px solid lightslategrey;
             border-collapse: collapse;
             background-color: #fcfcfc;
@@ -339,7 +339,7 @@
         td {
             padding: 6px
         }
-        
+
         #loading {
             height: 300px
         }
@@ -370,27 +370,27 @@
     </div>
 
     <div id="evaluate-content" class="tab-content">
-            <div class="container">
-                <h1>Project Deprehendere Upload Page</h1>
-                <p>Max. filesize: <strong>2 MB</strong><br/>Allowed file extensions: <strong>jpg, gif, png</strong></p>
+        <div class="container">
+            <h1>Project Deprehendere Upload Page</h1>
+            <p>Max. filesize: <strong>2 MB</strong><br/>Allowed file extensions: <strong>jpg, gif, png</strong></p>
 
-                <form action="http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="file" />
-                    <input type="submit" />
-                </form>
-<p id="message"></p>
-<div id="result" style="display: none">
-        <h2 style="text-align: center;">Your Results</h2>
-        <img id="loading" src="loading.gif" />
-</div>
+            <form onsubmit="event.preventDefault()" enctype="multipart/form-data">
+                <input id="file" type="file" name="file"/>
+                <button id="submit">Submit!</button>
+            </form>
+            <p id="message"></p>
+            <div id="result" style="display: none">
+                <h2 style="text-align: center;">Your Results</h2>
+                <img id="loading" src="static/loading.gif"/>
             </div>
-            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-            <!-- Include all compiled plugins (below), or include individual files as needed -->
-            <script src="http://malsup.github.com/min/jquery.form.min.js"></script>
-        <div id = "results">
-            
-        </div> 
+        </div>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="http://malsup.github.com/min/jquery.form.min.js"></script>
+        <div id="results">
+
+        </div>
     </div>
     <div id="mission-content" class="tab-content" style="margin-bottom: 50px;">
         <div class="mission-para"><p class="miss-left">
@@ -427,19 +427,31 @@
                     <div id="jp-bio" class="bio"><img id="JP-img" class="placeholder-bio">
                         <h2 class="bio-title">JP</h2>
                         <div class="bio-content">
-                            My name is JP Collins, and I am a student here at SHCP and am in the i2 Program. This year for my project, I decided to team up with Pascal to do something big. We agreed on exploring machine learning in the area of Facial Recognition. I worked on the PHP server that does the crucial job of being the liaison between Machine Learning and Website/UI. It takes the image and saves it so that the Machine Learning component can understand it, and takes the results so that the Website and with that, the user, can understand it. If you have any questions about the server or PHP, be sure to ask!
+                            My name is JP Collins, and I am a student here at SHCP and am in the i2 Program. This year
+                            for my project, I decided to team up with Pascal to do something big. We agreed on exploring
+                            machine learning in the area of Facial Recognition. I worked on the PHP server that does the
+                            crucial job of being the liaison between Machine Learning and Website/UI. It takes the image
+                            and saves it so that the Machine Learning component can understand it, and takes the results
+                            so that the Website and with that, the user, can understand it. If you have any questions
+                            about the server or PHP, be sure to ask!
                         </div>
                     </div>
                     <div id="pascal-bio" class="bio"><img id="pascal-img" class="placeholder-bio">
                         <h2 class="bio-title">Pascal</h2>
                         <div class="bio-content">
-                            Hi, my name is Pascal. I am part of the i2 program here at SHC. Every year, all of the i2 scholars are supposed to make an i2 project. In the end, I decided to work on a Facial Recognition project with JP. I decided to take on the Machine Learning part of the project. I have been coding for quite a while now and appreciated the new experience and challenge. I also designed large parts of the website and drew up the plan for how each of our three individual components would communicate with each other effectively. Feel free to ask me any questions you may have about the website and machine learning.
+                            Hi, my name is Pascal. I am part of the i2 program here at SHC. Every year, all of the i2
+                            scholars are supposed to make an i2 project. In the end, I decided to work on a Facial
+                            Recognition project with JP. I decided to take on the Machine Learning part of the project.
+                            I have been coding for quite a while now and appreciated the new experience and challenge. I
+                            also designed large parts of the website and drew up the plan for how each of our three
+                            individual components would communicate with each other effectively. Feel free to ask me any
+                            questions you may have about the website and machine learning.
                         </div>
                     </div>
                 </div>
                 <div id="mention" style="text-align: center">
                     Honorable Mention: Thomas Murphy<br>
-                    Dishonorable Mention: Timothy Nemchuck            
+                    Dishonorable Mention: Timothy Nemchuck
                 </div>
             </div>
         </div>
@@ -459,13 +471,37 @@
 
         for (var x = 0; x < tabs.length; x++) {
             tabs[x].classList.remove("active");
-            var id = elmnt.firstElementChild.innerHTML.toLowerCase()
-            if (id === "about us") {id = "about"}
+            var id = elmnt.firstElementChild.innerHTML.toLowerCase();
+            if (id === "about us") {
+                id = "about"
+            }
             id += "-content";
-            elem = document.getElementById(id)
+            var elem = document.getElementById(id);
             elem.classList.add("active");
         }
     }
+
+    $('#submit').on('click', function () {
+        var file_data = $('#file').prop('files')[0];
+        var form_data = new FormData();
+        form_data.append('file', file_data);
+        $.ajax({
+            url: '/uploader', // point to server-side controller method
+            dataType: 'text', // what to expect back from the server
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            success: function (response) {
+                $('#result').html(response); // display success response from the server
+                $('#result').show()
+            },
+            error: function (response) {
+                $('#result').html(response); // display error response from the server
+            }
+        });
+    });
 
 
     /*
