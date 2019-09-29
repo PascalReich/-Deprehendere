@@ -8,7 +8,8 @@ import sys
 
 import cv2
 
-from code.align_dlib import AlignDlib
+from SE_code.align_dlib import AlignDlib
+# from code.align_dlib import AlignDlib
 
 logger = logging.getLogger(__name__)
 return_img = []
