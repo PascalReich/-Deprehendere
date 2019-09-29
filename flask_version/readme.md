@@ -1,14 +1,14 @@
 === do once ===
 
-install venv
+=== install venv ===
 
-for windows
+==for windows
 pip install virtualenv
 
 then
 venv\scripts\activate
 
-for mac/linux
+==for mac/linux
 Sudo apt-get install virtualenv
 
 then
@@ -19,7 +19,7 @@ virtualenv venv
 then
 venv/bin/activate
 
-install flask
+==install flask
 pip install Flask
 
 === do everytime ===
