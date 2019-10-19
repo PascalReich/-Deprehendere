@@ -374,15 +374,16 @@
             <h1>Project Deprehendere Upload Page</h1>
             <p>Max. filesize: <strong>2 MB</strong><br/>Allowed file extensions: <strong>jpg, gif, png</strong></p>
 
-            <form onsubmit="event.preventDefault()" enctype="multipart/form-data">
-                <input id="file" type="file" name="file"/>
+            <form onsubmit="event.preventDefault(); this.reset()" enctype="multipart/form-data" id="imageform">
+                <input id="file" type="file" name="file" accept=".jpg, .jpeg"/>
                 <button id="submit">Submit!</button>
             </form>
             <p id="message"></p>
             <div id="result" style="display: none">
                 <h2 style="text-align: center;">Your Results</h2>
-                <div id="results"></div>
-                <img id="loading" src="static/loading.gif"/>
+                <div id="results">
+                  <img id="loading" src="static/loading.gif"/>
+                </div>
             </div>
         </div>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -483,8 +484,14 @@
     }
 
     $('#submit').on('click', function () {
+        if (document.getElementById('file').files.length == 0) {
+          throw 'no file selected'
+          return
+        }
+        document.getElementById('results').innerHTML = '<img id="loading" src="static/loading.gif"/>'
         $('#result').show()
         var file_data = $('#file').prop('files')[0];
+        $('#file').value = '';
         var form_data = new FormData();
         form_data.append('file', file_data);
         $.ajax({
