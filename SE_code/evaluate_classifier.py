@@ -24,6 +24,8 @@ import json
 
 logger = logging.getLogger(__name__)
 
+print(tf.__version__)
+
 
 class bcolors:
     HEADER = '\033[95m'
