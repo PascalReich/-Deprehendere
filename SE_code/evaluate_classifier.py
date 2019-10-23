@@ -41,7 +41,7 @@ class bcolors:
 def main(images, model_path, id_classifier_output_path, gen_classifier_output_path, age_classifier_output_path, batch_size, num_threads, override):
 
     results_out_path = images
-    tf.logging.set_verbosity(tf.logging.ERROR)
+   # tf.logging.set_verbosity(tf.logging.ERROR)
 
 
     """
@@ -217,6 +217,7 @@ def _create_embeddings(embedding_layer, images, labels, images_placeholder, phas
         i = 0
         while True:
             batch_images, batch_labels = sess.run([images, labels])
+            print(batch_images, batch_labels)
             emb = sess.run(embedding_layer, feed_dict={images_placeholder: batch_images, phase_train_placeholder: False})
             emb_array = np.concatenate([emb_array, emb]) if emb_array is not None else emb
             logger.info('% - Processed iteration {} batch of size: {}'.format(i, len(batch_labels)))

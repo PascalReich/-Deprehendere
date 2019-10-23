@@ -1,15 +1,13 @@
-tensorflow==1.1.0
+tensorflow
+
+numpy
 
 scikit-learn==0.18.2
 
 scipy==0.19.1
-
-numpy==1.13.1
 
 requests==2.18.3
 
 flask
 
 opencv-python
-
-dlib

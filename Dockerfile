@@ -24,6 +24,8 @@ ADD $PWD/requirements.txt /requirements.txt
 
 RUN pip3 install -r /requirements.txt
 
+RUN pip3 install dlib
+
 EXPOSE 5000
 
 CMD ["/bin/bash"]
