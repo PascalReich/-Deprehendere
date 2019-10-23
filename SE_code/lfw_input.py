@@ -1,5 +1,5 @@
 import logging
-import os
+import os, sys
 
 import numpy as np
 import tensorflow as tf
@@ -7,7 +7,7 @@ from tensorflow.python.framework import ops
 
 logger = logging.getLogger(__name__)
 
-
+@tf.function
 def read_data(image_paths, label_list, image_size, batch_size, max_nrof_epochs, num_threads, shuffle, random_flip,
               random_brightness, random_contrast):
     """
@@ -31,15 +31,32 @@ def read_data(image_paths, label_list, image_size, batch_size, max_nrof_epochs, 
     labels = ops.convert_to_tensor(label_list, dtype=tf.int32)
 
     # Makes an input queue
-    input_queue = tf.train.slice_input_producer((images, labels),
-                                                num_epochs=max_nrof_epochs, shuffle=shuffle, )
+    # input_queue = tf.compat.v1.train.slice_input_producer((images, labels),
+    #                                           num_epochs=max_nrof_epochs, shuffle=shuffle, )
+    
+    if shuffle:
+        input_queue = tf.data.Dataset.from_tensor_slices((images, labels)).shuffle(tf.shape(images, out_type=tf.int64)[0]).repeat(max_nrof_epochs)
+    else:
+        input_queue = tf.data.Dataset.from_tensor_slices((images, labels))
 
+    print(tf.tuple(input_queue))
     images_labels = []
     imgs = []
     lbls = []
+    # _input = (['label'], [0])
+    image, label = 'str', []
+
     for _ in range(num_threads):
-        image, label = read_image_from_disk(filename_to_label_tuple=input_queue)
-        image = tf.random_crop(image, size=[image_size, image_size, 3])
+        #a=0
+        for i in input_queue:
+            #assert a < 1
+            image, label = read_image_from_disk(filename_to_label_tuple=i)
+
+            break
+            #a+=1
+            
+        # image, label = read_image_from_disk(filename_to_label_tuple=_input)
+        image = tf.compat.v1.random_crop(image, size=[image_size, image_size, 3])
         image.set_shape((image_size, image_size, 3))
         image = tf.image.per_image_standardization(image)
 
@@ -56,13 +73,13 @@ def read_data(image_paths, label_list, image_size, batch_size, max_nrof_epochs, 
         lbls.append(label)
         images_labels.append([image, label])
 
-    image_batch, label_batch = tf.train.batch_join(images_labels,
+    image_batch, label_batch = tf.compat.v1.train.batch_join(images_labels,
                                                    batch_size=batch_size,
                                                    capacity=4 * num_threads,
                                                    enqueue_many=False, allow_smaller_final_batch=True)
     return image_batch, label_batch
 
-
+@tf.function
 def read_image_from_disk(filename_to_label_tuple):
     """
     Consumes input tensor and loads image
@@ -70,10 +87,15 @@ def read_image_from_disk(filename_to_label_tuple):
     :type filename_to_label_tuple: list
     :return: tuple of image and label
     """
+    it = iter(filename_to_label_tuple[0])
+
+    print(next(it))
+    # print(filename_to_label_tuple[0])
     label = filename_to_label_tuple[1]
-    file_contents = tf.read_file(filename_to_label_tuple[0])
-    example = tf.image.decode_jpeg(file_contents, channels=3)
-    return example, label
+    #file_contents = tf.compat.v1.read_file(filename_to_label_tuple[0])
+    #example = tf.compat.v1.image.decode_jpeg(file_contents, channels=3)
+    sys.exit(-1)
+    return None #example, label
 
 
 def get_image_paths_and_labels(dataset):

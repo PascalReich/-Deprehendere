@@ -76,7 +76,7 @@ def main(images, model_path, id_classifier_output_path, gen_classifier_output_pa
         sys.exit('no classifier')
 
     start_time = time.time()
-    with tf.Session(config=tf.ConfigProto(log_device_placement=False)) as sess:
+    with tf.compat.v1.Session() as sess:
         test_set = images
 
         """, test_set = _get_test_and_train_set(input_directory, min_num_images_per_label=min_images_per_labels,
@@ -87,31 +87,35 @@ def main(images, model_path, id_classifier_output_path, gen_classifier_output_pa
                                                                                random_flip=True, random_brightness=True,
                                                                                random_contrast=True)
         else:"""
-        images, labels, image_path = _load_images_and_labels(test_set, image_size=160, batch_size=batch_size,
-                                                 num_threads=num_threads, num_epochs=1)
+        '''images, labels, image_path = _load_images_and_labels(test_set, image_size=180, batch_size=batch_size,
+                                                 num_threads=num_threads, num_epochs=1)'''
+
+        
 
         _load_model(model_filepath=model_path)
 
-        init_op = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
+        init_op = tf.compat.v1.group(tf.compat.v1.global_variables_initializer(), tf.compat.v1.local_variables_initializer())
         sess.run(init_op)
 
-        images_placeholder = tf.get_default_graph().get_tensor_by_name("input:0")
-        embedding_layer = tf.get_default_graph().get_tensor_by_name("embeddings:0")
-        phase_train_placeholder = tf.get_default_graph().get_tensor_by_name("phase_train:0")
+        images_placeholder = tf.compat.v1.get_default_graph().get_tensor_by_name("input:0")
+        embedding_layer = tf.compat.v1.get_default_graph().get_tensor_by_name("embeddings:0")
+        phase_train_placeholder = tf.compat.v1.get_default_graph().get_tensor_by_name("phase_train:0")
+
+        print(images_placeholder, images_placeholder.shape)
 
         coord = tf.train.Coordinator()
-        threads = tf.train.start_queue_runners(coord=coord, sess=sess)
+        threads = tf.compat.v1.train.start_queue_runners(coord=coord, sess=sess)
 
-        emb_array = _create_embeddings(embedding_layer, images, labels, images_placeholder,
+        emb_array = _create_embeddings(embedding_layer, images, images_placeholder,
                                        phase_train_placeholder, sess,
                                        batch_size, override, coord, threads)
 
-        try:
-            coord.request_stop()
-            coord.join(threads=threads)
-            sess.close()
-        except:
-            print("error in threds/sess closing")
+        # try:
+        coord.request_stop()
+        coord.join(threads=threads)
+        sess.close()
+        # except:
+        #    print("error in threads/sess closing")
 
         logger.info('Created {} embeddings'.format(len(emb_array)))
 
@@ -175,15 +179,15 @@ def _load_model(model_filepath):
     if os.path.isfile(model_exp):
         logging.info('Model filename: %s' % model_exp)
         with gfile.FastGFile(model_exp, 'rb') as f:
-            graph_def = tf.GraphDef()
+            graph_def = tf.compat.v1.GraphDef()
             graph_def.ParseFromString(f.read())
-            tf.import_graph_def(graph_def, name='')
+            tf.compat.v1.import_graph_def(graph_def, name='')
     else:
         logger.error('Missing model file. Exiting')
         sys.exit(-1)
 
 
-def _create_embeddings(embedding_layer, images, labels, images_placeholder, phase_train_placeholder, sess,
+def _create_embeddings(embedding_layer, images, images_placeholder, phase_train_placeholder, sess,
                        batch_size, override, coord, threads):
     """
     Uses model to generate embeddings from :param images.
@@ -216,8 +220,10 @@ def _create_embeddings(embedding_layer, images, labels, images_placeholder, phas
     try:
         i = 0
         while True:
-            batch_images, batch_labels = sess.run([images, labels])
-            print(batch_images, batch_labels)
+            # batch_images, batch_labels = sess.run([images, labels])
+            # batch_images = sess.run([images])
+            # print(batch_images, batch_labels)
+            batch_images = tf.convert_to_tensor(images)
             emb = sess.run(embedding_layer, feed_dict={images_placeholder: batch_images, phase_train_placeholder: False})
             emb_array = np.concatenate([emb_array, emb]) if emb_array is not None else emb
             logger.info('% - Processed iteration {} batch of size: {}'.format(i, len(batch_labels)))
@@ -259,6 +265,7 @@ def _evaluate_classifier(emb_array, classifier_filename, images, paths):
             model, class_names = pickle.load(IDf)
 
             predictions = model.predict_proba(emb_array)
+            print(predictions)
             best_class_indices = np.argmax(predictions, axis=1)
             best_class_probabilities = predictions[np.arange(len(best_class_indices)), best_class_indices]
 

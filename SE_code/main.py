@@ -16,9 +16,10 @@ def main(input_directory, model_path, id_classifier_output_path, gen_classifier_
         print("cropping images")
         random_int = str(randint(10000, 99999))
         random_int = "src/static/" + random_int
-        prepro.main(input_directory, 180, random_int)
+        cropped_img = prepro.main(input_directory, 180, random_int)
         input_directory = random_int
-    labels = eval.main(input_directory, model_path, id_classifier_output_path, gen_classifier_output_path, age_classifier_output_path, batch_size,  num_threads, is_yes)
+    print("starting eval")
+    labels = eval.main(cropped_img, model_path, id_classifier_output_path, gen_classifier_output_path, age_classifier_output_path, batch_size,  num_threads, is_yes)
     """print("Final Results:")
     print(labels)"""
     #if not eval_only:

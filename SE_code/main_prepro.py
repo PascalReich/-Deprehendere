@@ -32,14 +32,17 @@ def main(input_dir, crop_dim, random_int):
             os.makedirs(image_output_dir)
 
     image_paths = glob.glob(os.path.join(input_dir, '**/*.jpg'))
-    for index, image_path in enumerate(image_paths):
-        image_output_dir = os.path.join(random_int, os.path.basename(os.path.dirname(image_path)))
-        path = image_path.split('/')[-1]
-        output_path = os.path.join(image_output_dir, path)
-        pool.apply_async(preprocess_image, (image_path, output_path, crop_dim))
+    # print(image_paths)
 
-    pool.close()
-    pool.join()
+    image_path = image_paths[0]
+    image_output_dir = os.path.join(random_int, os.path.basename(os.path.dirname(image_path)))
+    path = image_path.split('/')[-1]
+    output_path = os.path.join(image_output_dir, path)
+    img = preprocess_image(image_path, output_path, crop_dim)
+    print(img)
+    return img
+
+    
     logger.info('Completed in {} seconds'.format(time.time() - start_time))
 
 
@@ -54,10 +57,12 @@ def preprocess_image(input_path, output_path, crop_dim):
     image = _process_image(input_path, crop_dim)
     if image is not None:
         cv2.imwrite(output_path, image)
+        # print(image)
         logger.debug('Writing processed file: {}'.format(output_path))
     else:
         logger.debug("Skipping filename: {}".format(input_path))
     # logger.info("finished: " + output_path)
+    return image
 
 
 def _process_image(filename, crop_dim):
