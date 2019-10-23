@@ -154,8 +154,8 @@ def main(images, model_path, id_classifier_output_path, gen_classifier_output_pa
 def _load_images_and_labels(dataset, image_size, batch_size, num_threads, num_epochs, random_flip=False,
                             random_brightness=False, random_contrast=False):
     # class_names = [cls.name for cls in dataset]
-    print(dataset)
-    print("loading")
+    # print(dataset)
+    print("loading set")
     dataset = get_dataset(dataset)
     dataset = filter_dataset(dataset, min_images_per_label=0)
     image_paths, labels = lfw_input.get_image_paths_and_labels(dataset)

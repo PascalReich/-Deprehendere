@@ -9,3 +9,7 @@ numpy==1.13.1
 requests==2.18.3
 
 flask
+
+opencv-python
+
+dlib
