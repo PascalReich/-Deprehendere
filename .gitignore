@@ -1,2 +1,5 @@
 /.idea/
 /__pycache__/
+/uploads/
+/static/
+/SE_code/
