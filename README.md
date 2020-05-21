@@ -13,7 +13,7 @@ Our SHC 2018-2020 i2 Project
 ### Starting the server
 
 1. `cd ./-Deprehendere`
-2. `pip install -r`
+2. `pip install -r requirements.txt`
 3. `python3 main.py` NOTE: 'python3' could just be `python` or it could be version-specific 'python38' it really depends on how you installed it.
 
 ***
