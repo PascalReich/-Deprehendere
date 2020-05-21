@@ -1,0 +1,9 @@
+tensorflow
+
+numpy
+
+opencv-python
+
+cmake
+
+dlib==19.19
