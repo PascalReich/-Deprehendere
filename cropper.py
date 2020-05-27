@@ -2,18 +2,12 @@
 
 import dlib, cv2
 import numpy as np
-import io
-import requests
 
 predictor_path = 'models/shape_predictor_68_face_landmarks.dat'
 
-def load_from_github(path):
-    url = "https://github.com/22preich/-Deprehendere/blob/showcase2020/" + path + "?raw=true"
-    #print(requests.get(url).content)
-    return io.BytesIO(requests.get(url).content)
 
 detector = dlib.get_frontal_face_detector()
-sp = dlib.shape_predictor(load_from_github(predictor_path))
+sp = dlib.shape_predictor(predictor_path)
 
 
 def crop(face_file_path):
@@ -37,7 +31,6 @@ def crop(face_file_path):
 
 
 def cropFileStorageObject(file_storage):
-
     filestr = file_storage.read()
 
     npimg = np.fromstring(filestr, np.uint8)
@@ -60,4 +53,3 @@ def cropFileStorageObject(file_storage):
     # TODO we can choose faces
     # ret = cv2.cvtColor(images[0], cv2.COLOR_BGR2RGB)
     return img, cv2.imencode('.jpg', img)[1]
-
