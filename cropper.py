@@ -2,11 +2,18 @@
 
 import dlib, cv2
 import numpy as np
+import io
+import requests
 
 predictor_path = 'models/shape_predictor_68_face_landmarks.dat'
 
+def load_from_github(path):
+    url = "https://github.com/22preich/-Deprehendere/blob/showcase2020/" + path + "?raw=true"
+    #print(requests.get(url).content)
+    return io.BytesIO(requests.get(url).content)
+
 detector = dlib.get_frontal_face_detector()
-sp = dlib.shape_predictor(predictor_path)
+sp = dlib.shape_predictor(load_from_github(predictor_path))
 
 
 def crop(face_file_path):
