@@ -1,11 +1,21 @@
 import tensorflow as tf
 import numpy as np
 import json, os
+import requests
+import io
+import h5py
+
+
+def load_from_github(path):
+    url = "https://github.com/22preich/-Deprehendere/blob/showcase2020/" + path + "?raw=true"
+    #print(requests.get(url).content)
+    return h5py.File(io.BytesIO(requests.get(url).content))
+
 
 models = {
-    "id": tf.keras.models.load_model("models/id/idk-id.h5"),
-    "gen": tf.keras.models.load_model("models/gen/15-altb-gen.h5"),
-    "age": tf.keras.models.load_model("models/age/idk-long-age.h5")
+    "id": tf.keras.models.load_model(load_from_github("models/id/idk-id.h5")),
+    "gen": tf.keras.models.load_model(load_from_github("models/gen/15-altb-gen.h5")),
+    "age": tf.keras.models.load_model(load_from_github("models/age/idk-long-age.h5"))
 }
 
 
