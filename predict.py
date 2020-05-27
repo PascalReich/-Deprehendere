@@ -8,8 +8,8 @@ import h5py
 
 def load_from_github(path):
     url = "https://github.com/22preich/-Deprehendere/blob/showcase2020/" + path + "?raw=true"
-    #print(requests.get(url).content)
-    return h5py.File(io.BytesIO(requests.get(url).content))
+    print(f"retrieved {path} from github")
+    return h5py.File(io.BytesIO(requests.get(url).content), 'r')
 
 
 models = {
