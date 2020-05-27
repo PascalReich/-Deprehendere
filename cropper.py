@@ -2,9 +2,16 @@
 
 import dlib, cv2
 import numpy as np
+import requests
 
 predictor_path = 'models/shape_predictor_68_face_landmarks.dat'
 
+url = 'https://github.com/22preich/-Deprehendere/blob/showcase2020/models/shape_predictor_68_face_landmarks.dat' \
+      '?raw=true '
+
+r = requests.get(url, allow_redirects=True)
+
+open(predictor_path, 'wb').write(r.content)
 
 detector = dlib.get_frontal_face_detector()
 sp = dlib.shape_predictor(predictor_path)
