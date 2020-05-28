@@ -34,8 +34,11 @@ def file_uploaded():
     else:
         raise TypeError
 
-    return render_template('results.html', labels=labels, base64=base64.b64encode(base64compat).decode(),
-                           time=time.time() - start)
+    template = render_template('results.html', labels=labels, base64=base64.b64encode(base64compat).decode(),
+                               time=time.time() - start)
+    template.headers.add('Access-Control-Allow-Origin', '*')
+
+    return template
 
 
 if __name__ == '__main__':
