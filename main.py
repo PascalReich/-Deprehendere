@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 import predict
 import cropper
 import time
@@ -34,9 +34,9 @@ def file_uploaded():
     else:
         raise TypeError
 
-    template = render_template('results.html', labels=labels, base64=base64.b64encode(base64compat).decode(),
-                               time=time.time() - start)
-    template.headers.add('Access-Control-Allow-Origin', '*')
+    template = make_response(render_template('results.html', labels=labels, base64=base64.b64encode(base64compat).decode(),
+                               time=time.time() - start))
+    template.headers['Access-Control-Allow-Origin'] = '*'
 
     return template
 
