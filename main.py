@@ -13,10 +13,11 @@ def main():
 
 
 @app.route('/status')
-def main():
+def status():
     response = make_response('', 204)
     response.headers['Access-Control-Allow-Origin'] = '*'
     return response
+
 
 @app.route('/upload')
 def upload_file():
@@ -40,8 +41,9 @@ def file_uploaded():
     else:
         raise TypeError
 
-    template = make_response(render_template('results.html', labels=labels, base64=base64.b64encode(base64compat).decode(),
-                               time=time.time() - start))
+    template = make_response(
+        render_template('results.html', labels=labels, base64=base64.b64encode(base64compat).decode(),
+                        time=time.time() - start))
     template.headers['Access-Control-Allow-Origin'] = '*'
 
     return template
