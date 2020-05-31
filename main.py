@@ -12,6 +12,12 @@ def main():
     return render_template('index.html')
 
 
+@app.route('/status')
+def main():
+    response = make_response('', 204)
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
+
 @app.route('/upload')
 def upload_file():
     return render_template('upload.html')
