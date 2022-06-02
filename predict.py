@@ -33,8 +33,8 @@ def get_label(name, model, img):
     if name in ("id", "age"):
         return get_indices(name)[str(np.argmax(pred))], 0
     elif name == "gen":
-        return get_indices("gen")[str(int(round(pred[0][0].numpy())))], pred[0][0].numpy() if not int(
-            round(pred[0][0].numpy())) else 100 - pred[0][0].numpy()
+        return get_indices("gen")[str(int(round(pred[0][0])))], pred[0][0] if not int(
+            round(pred[0][0])) else 100 - pred[0][0]
     else:
         raise RuntimeError
 
